@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity adder is
-	port (A0, A1, A2, A3, A4, A5, A6, A7,
-			B0, B1, B2, B3, B4, B5, B6, B7 : in bit;
-			S0, S1, S2, S3, S4, S5, S6, S7, COUT : out bit
-			);
+	port(
+		A, B : in std_logic_vector(7 downto 0);
+		S : out std_logic_vector(8 downto 0)
+	);
 end entity adder;
 
 architecture main of adder is
@@ -20,16 +20,15 @@ architecture main of adder is
 	signal C1, C2, C3, C4, C5, C6, C7, C8 : bit;
 begin 
 	
-	FA0: full_adder port map(a => A0, b => B0, cin => '0', s => S0, cout => C1);
-	FA1: full_adder port map(a => A1, b => B1, cin => C1 , s => S1, cout => C2);
-	FA2: full_adder port map(a => A2, b => B2, cin => C2 , s => S2, cout => C3);
-	FA3: full_adder port map(a => A3, b => B3, cin => C3 , s => S3, cout => C4);
-	FA4: full_adder port map(a => A4, b => B4, cin => C4 , s => S4, cout => C5);
-	FA5: full_adder port map(a => A5, b => B5, cin => C5 , s => S5, cout => C6);
-	FA6: full_adder port map(a => A6, b => B6, cin => C6 , s => S6, cout => C7);
-	FA7: full_adder port map(a => A7, b => B7, cin => C7 , s => S7, cout => C8);
+	FA0: full_adder port map(a => A(0), b => B(0), cin => '0', s => S(0), cout => C1);
+	FA1: full_adder port map(a => A(1), b => B(1), cin => C1 , s => S(1), cout => C2);
+	FA2: full_adder port map(a => A(2), b => B(2), cin => C2 , s => S(2), cout => C3);
+	FA3: full_adder port map(a => A(3), b => B(3), cin => C3 , s => S(3), cout => C4);
+	FA4: full_adder port map(a => A(4), b => B(4), cin => C4 , s => S(4), cout => C5);
+	FA5: full_adder port map(a => A(5), b => B(5), cin => C5 , s => S(5), cout => C6);
+	FA6: full_adder port map(a => A(6), b => B(6), cin => C6 , s => S(6), cout => C7);
+	FA7: full_adder port map(a => A(7), b => B(7), cin => C7 , s => S(7), cout => C8);
 	
-	COUT <= C8;
+	S(8) <= C8;
 end architecture main;
-	
 	
