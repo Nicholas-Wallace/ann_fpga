@@ -1,0 +1,195 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mult is
+	port(
+		A, B : in std_logic_vector(7 downto 0);
+		Produto : out std_logic_vector(7 downto 0)
+	);
+end entity mult;
+
+architecture behav of mult is
+
+	-- Instanciação de componentes:
+	component Adder9 is
+		port(
+			A, B : in std_logic_vector(8 downto 0);
+			S : out std_logic_vector(9 downto 0)
+		);
+	end component;
+	
+	component Adder10 is
+		port(
+			A, B : in std_logic_vector(9 downto 0);
+			S : out std_logic_vector(10 downto 0)
+		);
+	end component;
+	
+	component Adder11 is
+	port(
+		A, B : in std_logic_vector(10 downto 0);
+		S : out std_logic_vector(11 downto 0)
+	);
+	end component;
+
+	component Adder12 is
+	port(
+		A, B : in std_logic_vector(11 downto 0);
+		S : out std_logic_vector(12 downto 0)
+	);
+	end component;
+	
+	component Adder13 is
+	port(
+		A, B : in std_logic_vector(12 downto 0);
+		S : out std_logic_vector(13 downto 0)
+	);
+	end component;
+
+	component Adder14 is
+	port(
+		A, B : in std_logic_vector(13 downto 0);
+		S : out std_logic_vector(14 downto 0)
+	);
+	end component;
+	
+	component Adder15 is
+	port(
+		A, B : in std_logic_vector(14 downto 0);
+		S : out std_logic_vector(15 downto 0)
+	);
+	end component;
+
+	-- Declaração do tipo "Matriz de bits" para armazenar os produtos parciais
+	type bit_matrix is array(0 to 7, 0 to 7) of std_logic;
+	-- Sinais auxiliares: produtos parciais
+	signal pp_array : bit_matrix;
+	-- Sinais auxiliares: somas parciais
+	signal pp1, pp2 : std_logic_vector(8 downto 0);
+	signal s1 : std_logic_vector(9 downto 0);
+	signal pp3 : std_logic_vector(9 downto 0);
+	signal s2 : std_logic_vector(10 downto 0);
+	signal pp4 : std_logic_vector(10 downto 0);
+	signal s3 : std_logic_vector(11 downto 0);
+	signal pp5 : std_logic_vector(11 downto 0);
+	signal s4 : std_logic_vector(12 downto 0);
+	signal pp6 : std_logic_vector(12 downto 0);
+	signal s5 : std_logic_vector(13 downto 0);
+	signal pp7 : std_logic_vector(13 downto 0);
+	signal s6 : std_logic_vector(14 downto 0);
+	signal pp8 : std_logic_vector(14 downto 0);
+	signal s7 : std_logic_vector(15 downto 0);
+	signal Trunc : std_logic_vector(7 downto 0);
+	
+	begin
+	-- Calculando produtos parciais:
+		-- Linha 1: 
+	pp_array(0,0) <= A(0) and B(0);
+	pp_array(0,1) <= A(1) and B(0);
+	pp_array(0,2) <= A(2) and B(0);
+	pp_array(0,3) <= A(3) and B(0);
+	pp_array(0,4) <= A(4) and B(0);
+	pp_array(0,5) <= A(5) and B(0);
+	pp_array(0,6) <= A(6) and B(0);
+	pp_array(0,7) <= A(7) and B(0);
+		-- Linha 2:
+	pp_array(1,0) <= A(0) and B(1);
+	pp_array(1,1) <= A(1) and B(1);
+	pp_array(1,2) <= A(2) and B(1);
+	pp_array(1,3) <= A(3) and B(1);
+	pp_array(1,4) <= A(4) and B(1);
+	pp_array(1,5) <= A(5) and B(1);
+	pp_array(1,6) <= A(6) and B(1);
+	pp_array(1,7) <= A(7) and B(1);
+		-- Linha 3:
+	pp_array(2,0) <= A(0) and B(2);
+	pp_array(2,1) <= A(1) and B(2);
+	pp_array(2,2) <= A(2) and B(2);
+	pp_array(2,3) <= A(3) and B(2);
+	pp_array(2,4) <= A(4) and B(2);
+	pp_array(2,5) <= A(5) and B(2);
+	pp_array(2,6) <= A(6) and B(2);
+	pp_array(2,7) <= A(7) and B(2);
+		-- Linha 4:
+	pp_array(3,0) <= A(0) and B(3);
+	pp_array(3,1) <= A(1) and B(3);
+	pp_array(3,2) <= A(2) and B(3);
+	pp_array(3,3) <= A(3) and B(3);
+	pp_array(3,4) <= A(4) and B(3);
+	pp_array(3,5) <= A(5) and B(3);
+	pp_array(3,6) <= A(6) and B(3);
+	pp_array(3,7) <= A(7) and B(3);
+		-- Linha 5:
+	pp_array(4,0) <= A(0) and B(4);
+	pp_array(4,1) <= A(1) and B(4);
+	pp_array(4,2) <= A(2) and B(4);
+	pp_array(4,3) <= A(3) and B(4);
+	pp_array(4,4) <= A(4) and B(4);
+	pp_array(4,5) <= A(5) and B(4);
+	pp_array(4,6) <= A(6) and B(4);
+	pp_array(4,7) <= A(7) and B(4);
+		-- Linha 6:
+	pp_array(5,0) <= A(0) and B(5);
+	pp_array(5,1) <= A(1) and B(5);
+	pp_array(5,2) <= A(2) and B(5);
+	pp_array(5,3) <= A(3) and B(5);
+	pp_array(5,4) <= A(4) and B(5);
+	pp_array(5,5) <= A(5) and B(5);
+	pp_array(5,6) <= A(6) and B(5);
+	pp_array(5,7) <= A(7) and B(5);
+		-- Linha 7:
+	pp_array(6,0) <= A(0) and B(6);
+	pp_array(6,1) <= A(1) and B(6);
+	pp_array(6,2) <= A(2) and B(6);
+	pp_array(6,3) <= A(3) and B(6);
+	pp_array(6,4) <= A(4) and B(6);
+	pp_array(6,5) <= A(5) and B(6);
+	pp_array(6,6) <= A(6) and B(6);
+	pp_array(6,7) <= A(7) and B(6);
+		-- Linha 8:
+	pp_array(7,0) <= A(0) and B(7);
+	pp_array(7,1) <= A(1) and B(7);
+	pp_array(7,2) <= A(2) and B(7);
+	pp_array(7,3) <= A(3) and B(7);
+	pp_array(7,4) <= A(4) and B(7);
+	pp_array(7,5) <= A(5) and B(7);
+	pp_array(7,6) <= A(6) and B(7);
+	pp_array(7,7) <= A(7) and B(7);
+	
+	-- Soma parcial 1: pp1+pp2
+	-- pp1: 0 b0a7 b0a6 b0a5 b0a4 b0a3 b0a2 b0a1 b0a0
+	-- pp2: b1a7 b1a6 b1a5 b1a4 b1a3 b1a2 b1a1 b1a0 0
+	pp1 <= '0' & pp_array(0, 7) & pp_array(0, 6) & pp_array(0, 5) & pp_array(0, 4) & pp_array(0, 3) & pp_array(0, 2) & pp_array(0, 1) & pp_array(0, 0);
+	pp2 <= pp_array(1, 7) & pp_array(1, 6) & pp_array(1, 5) & pp_array(1, 4) & pp_array(1, 3) & pp_array(1, 2) & pp_array(1, 1) & pp_array(1, 0) & '0';
+	Soma1: Adder9 port map(A => pp1, B => pp2, S => s1);
+	-- Soma parcial 2: s1 + pp3
+	-- pp3: b2a7 b2a6 b2a5 b2a4 b2a3 b2a2 b2a1 b2a0 0 0
+	pp3 <= pp_array(2, 7) & pp_array(2, 6) & pp_array(2, 5) & pp_array(2, 4) & pp_array(2, 3) & pp_array(2, 2) & pp_array(2, 1) & pp_array(2, 0) & '0' & '0';
+	Soma2: Adder10 port map(A => pp3, B => s1, S => s2);
+	-- Soma parcial 3: s2 + pp4
+	-- pp4: b3a7 b3a6 b3a5 b3a4 b3a3 b3a2 b3a1 b3a0 0 0 0
+	pp4 <= pp_array(3, 7) & pp_array(3, 6) & pp_array(3, 5) & pp_array(3, 4) & pp_array(3, 3) & pp_array(3, 2) & pp_array(3, 1) & pp_array(3, 0) & '0' & '0' & '0';
+	Soma3: Adder11 port map(A => pp4, B => s2, S => s3);
+	-- Soma parcial 4: s3 + pp5
+	-- pp5: b4a7 b4a6 b4a5 b4a4 b4a3 b4a2 b4a1 b4a0 0 0 0 0
+	pp5 <= pp_array(4, 7) & pp_array(4, 6) & pp_array(4, 5) & pp_array(4, 4) & pp_array(4, 3) & pp_array(4, 2) & pp_array(4, 1) & pp_array(4, 0) & '0' & '0' & '0' & '0';
+	Soma4: Adder12 port map(A => pp5, B => s3, S => s4);
+	-- Soma parcial 5: s4 + pp6
+	-- pp6: b5a7 b5a6 b5a5 b5a4 b5a3 b5a2 b5a1 b5a0 0 0 0 0 0
+	pp6 <= pp_array(5, 7) & pp_array(5, 6) & pp_array(5, 5) & pp_array(5, 4) & pp_array(5, 3) & pp_array(5, 2) & pp_array(5, 1) & pp_array(5, 0) & '0' & '0' & '0' & '0' & '0';
+	Soma5: Adder13 port map(A => pp6, B => s4, S => s5);
+	-- Soma parcial 6: s5 + pp7
+	-- pp7: b6a7 b6a6 b6a5 b6a4 b6a3 b6a2 b6a1 b6a0 0 0 0 0 0 0
+	pp7 <= pp_array(6, 7) & pp_array(6, 6) & pp_array(6, 5) & pp_array(6, 4) & pp_array(6, 3) & pp_array(6, 2) & pp_array(6, 1) & pp_array(6, 0) & '0' & '0' & '0' & '0' & '0' & '0';
+	Soma6: Adder14 port map(A => pp7, B => s5, S => s6);
+	-- Soma parcial 7: s6 + pp8
+	-- pp8: b7a7 b7a6 b7a5 b7a4 b7a3 b7a2 b7a1 b7a0 0 0 0 0 0 0 0
+	pp8 <= pp_array(7, 7) & pp_array(7, 6) & pp_array(7, 5) & pp_array(7, 4) & pp_array(7, 3) & pp_array(7, 2) & pp_array(7, 1) & pp_array(7, 0) & '0' & '0' & '0' & '0' & '0' & '0' & '0';
+	Soma7: Adder15 port map(A => pp8, B => s6, S => s7);
+	
+	Truncamento: for i in 0 to 7 generate
+		Trunc(i) <= s7(i);
+		end generate Truncamento;
+	produto <= Trunc;
+	
+end architecture behav;

@@ -3,15 +3,15 @@ use ieee.std_logic_1164.all;
 
 -- registrador
 
-entity reg is
-port( A_REG : in std_logic_vector(7 downto 0);
+entity reg_estados is
+port( A_REG : in std_logic_vector(3 downto 0);
 		clk : in std_logic;
 		en : in std_logic;
-		S_REG : out std_logic_vector(7 downto 0)
+		S_REG : out std_logic_vector(3 downto 0)
 );
 end reg;
 
-architecture behav of reg is
+architecture behav of reg_estados is
 begin 
 	process(clk) is
 		begin 
