@@ -41,14 +41,16 @@ architecture main of controlador is
 	component reg_estados is
 		port( A_REG : in std_logic_vector(3 downto 0);
 				clk : in std_logic;
-				en : in std_logic;
+				en_REG : in std_logic;
 				S_REG : out std_logic_vector(3 downto 0)
 		);
+
+		R : reg_estados port map (A_REG <= NS, clk <= clock, en_REG <= en, S_REG <= S);
 		
-		NS(0) <= (not S0 and S1 and S2 and S3) or (S0 and (not S1) and (not S2) and (not S3)) or (S0 and (not S1) and (not S2) and S3);
-		NS(1) <= ((not SO) (not S1) S2 S3 or (not SO) S1 (not S2) (not S3) or (not SO) S1 (not S2) S3 or (not SO) S1 S2 (not S3);
-		NS(2) <= ((not SO) (not S1) (not S2) S3) or ((not SO) (not S1) S2 (not S3)) or ((not SO) S1 (not S2) S3) or ((not SO) S1 S2 (not S3)) or (S0 (not S1) (not S2) S3);
-		NS(3) <= ((not SO) (not S1) (not S2) (not S3)) or ((not SO) (not S1) (not S2) S3) or ((not SO) (not S1) S2 (not S3)) or ((not SO) S1 (not S2) (not S3)) or ((not SO) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3)) or (S0 (not S1) S2 (not S3));
+		NS(0) <= ((not S0) and S1 and S2 and S3) or (S0 and (not S1) and (not S2) and (not S3)) or (S0 and (not S1) and (not S2) and S3);
+		NS(1) <= ((not SO) and (not S1) and S2 and S3) or ((not SO) and S1 and (not S2) and (not S3)) or ((not SO) and S1 and (not S2) and S3) or ((not SO) and S1 and S2 and (not S3));
+		NS(2) <= ((not SO) and (not S1) and (not S2) and S3) or ((not SO) and (not S1) and S2 and (not S3)) or ((not SO) and S1 and (not S2) and S3) or ((not SO) and S1 and S2 and (not S3)) or (S0 and (not S1) and (not S2) and S3);
+		NS(3) <= ((not SO) and (not S1) and (not S2) and (not S3)) or (en and (not SO) and (not S1) and (not S2) and S3) or ((not SO) (not S1) S2 (not S3)) or ((not SO) S1 (not S2) (not S3)) or ((not SO) and S1 and S2 and (not S3)) or (S0 and (not S1) and (not S2) and (not S3)) or (S0 and (not S1) and S2 and (not S3));
 		
 		en_ROM_W <= ((not S0) (not S1) S2 (not S3)) or ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3));
 		en_ROM_B <= ((not S0) (not S1) S2 (not S3)) or ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3)) ;
