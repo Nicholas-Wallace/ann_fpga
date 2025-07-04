@@ -62,45 +62,45 @@ begin
 		
 		en_n30_comb <= (S(3) and (not S(2)) and S(1) and (not S(0)));
 		
-		add_W0_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and (not S(0)));
+		add_W0_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0)) or (S(3) and (not S(2)) and (not S(1)) and S(0));
 		add_W0_comb(1) <= '0';
-		add_W0_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_W0_comb(3) <= (S(3) and (not S(2)) and (not S(1)) and (not S(0)));
+		add_W0_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_W0_comb(3) <= (S(3) and (not S(2)) and (not S(1)) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and S(0));
 		
-		add_B0_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and (not S(0)));
+		add_B0_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0)) or (S(3) and (not S(2)) and (not S(1)) and S(0));
 		add_B0_comb(1) <= '0';
-		add_B0_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_B0_comb(3) <= (S(3) and (not S(2)) and (not S(1)) and (not S(0)));
+		add_B0_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_B0_comb(3) <= (S(3) and (not S(2)) and (not S(1)) and (not S(0))) or (S(3) and (not S(2)) and (not S(1)) and S(0));
 		
 		add_W1_comb(0) <= '0';
-		add_W1_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_W1_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_W1_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_W1_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		add_W1_comb(3) <= '0';
 		
 		add_B1_comb(0) <= '0';
-		add_B1_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_B1_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_B1_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_B1_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		add_B1_comb(3) <= '0';
 		
-		add_W2_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_W2_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_W2_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_W2_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_W2_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_W2_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		add_W2_comb(3) <= '0';
 		
-		add_B2_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_B2_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0)));
-		add_B2_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_B2_comb(0) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_B2_comb(1) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0)) or ((not S(3)) and S(2) and S(1) and S(0));
+		add_B2_comb(2) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		add_B2_comb(3) <= '0';
 		
 		add_W3_comb(0) <= '0';
 		add_W3_comb(1) <= '0';
-		add_W3_comb(2) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0)));
-		add_W3_comb(3) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_W3_comb(2) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0));
+		add_W3_comb(3) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		
 		add_B3_comb(0) <= '0';
 		add_B3_comb(1) <= '0';
-		add_B3_comb(2) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0)));
-		add_B3_comb(3) <= ((not S(3)) and S(2) and S(1) and (not S(0)));
+		add_B3_comb(2) <= ((not S(3)) and S(2) and (not S(1)) and (not S(0))) or ((not S(3)) and S(2) and (not S(1)) and S(0));
+		add_B3_comb(3) <= ((not S(3)) and S(2) and S(1) and (not S(0))) or ((not S(3)) and S(2) and S(1) and S(0));
 		
 end main;
 			

@@ -90,7 +90,7 @@ begin
 	state <= S_SIGNAL;
 	
 	C : combinacional port map(en_comb => en, S => S_SIGNAL, NS => NS_SIGNAL, add_W0_comb => add_W0, add_W1_comb => add_W1, add_W2_comb => add_W2, add_W3_comb => add_W3,
-																		 add_B1_comb => add_B1, add_B2_comb => add_B2, add_B3_comb => add_B3,
+																		 add_B0_comb => add_B0, add_B1_comb => add_B1, add_B2_comb => add_B2, add_B3_comb => add_B3,
 																		 en_ROM_B_comb => en_ROM_B, en_ROM_W_comb => en_ROM_W,
 																		 en_n00_comb => en_n00,
 																		 en_n10_comb => en_n10, en_n11_comb => en_n11, en_n12_comb => en_n12, en_n13_comb => en_n13,
