@@ -5,10 +5,10 @@ USE ieee.std_logic_arith.all;
 entity controlador is
 	port(
 		en : in std_logic;
-		S : in std_logic_vector(3 DOWNTO 0);
+		clock : in std_logic;
 		
 		-----------------------------------------
-		
+	
 		add_W0 : out std_logic_vector(3 DOWNTO 0);
 		add_W1 : out std_logic_vector(3 DOWNTO 0);
 		add_W2 : out std_logic_vector(3 DOWNTO 0);
@@ -33,83 +33,83 @@ entity controlador is
 		en_n23 : out std_logic;
 		en_n30 : out std_logic;
 		
+		------ debug -------
+		state : out std_logic_vector(3 DOWNTO 0)
+	);
+end entity;
+
+architecture main of controlador is
+
+component combinacional is
+	port(
+		en_comb : in std_logic;
+		S : in std_logic_vector(3 DOWNTO 0);
+		
+		-----------------------------------------
+		
+		add_W0_comb : out std_logic_vector(3 DOWNTO 0);
+		add_W1_comb : out std_logic_vector(3 DOWNTO 0);
+		add_W2_comb : out std_logic_vector(3 DOWNTO 0);
+		add_W3_comb : out std_logic_vector(3 DOWNTO 0);
+		
+		add_B0_comb : out std_logic_vector(3 DOWNTO 0);
+		add_B1_comb : out std_logic_vector(3 DOWNTO 0);
+		add_B2_comb : out std_logic_vector(3 DOWNTO 0);
+		add_B3_comb : out std_logic_vector(3 DOWNTO 0);
+		
+		en_ROM_W_comb : out std_logic;
+		en_ROM_B_comb : out std_logic;
+		
+		en_n00_comb : out std_logic;
+		en_n10_comb : out std_logic;
+		en_n11_comb : out std_logic;
+		en_n12_comb : out std_logic;
+		en_n13_comb : out std_logic;
+		en_n20_comb : out std_logic;
+		en_n21_comb : out std_logic;
+		en_n22_comb : out std_logic;
+		en_n23_comb : out std_logic;
+		en_n30_comb: out std_logic;
+		
 		NS : out std_logic_vector(3 DOWNTO 0)
 	);
-end controlador;
-	
-architecture main of controlador is
-	component reg_estados is
+end component;
+
+component reg_estados is
 		port( A_REG : in std_logic_vector(3 downto 0);
 				clk : in std_logic;
 				en_REG : in std_logic;
 				S_REG : out std_logic_vector(3 downto 0)
 		);
+end component;
 
-		R : reg_estados port map (A_REG <= NS, clk <= clock, en_REG <= en, S_REG <= S);
-		
-		NS(0) <= ((not S0) and S1 and S2 and S3) or (S0 and (not S1) and (not S2) and (not S3)) or (S0 and (not S1) and (not S2) and S3);
-		NS(1) <= ((not SO) and (not S1) and S2 and S3) or ((not SO) and S1 and (not S2) and (not S3)) or ((not SO) and S1 and (not S2) and S3) or ((not SO) and S1 and S2 and (not S3));
-		NS(2) <= ((not SO) and (not S1) and (not S2) and S3) or ((not SO) and (not S1) and S2 and (not S3)) or ((not SO) and S1 and (not S2) and S3) or ((not SO) and S1 and S2 and (not S3)) or (S0 and (not S1) and (not S2) and S3);
-		NS(3) <= ((not SO) and (not S1) and (not S2) and (not S3)) or (en and (not SO) and (not S1) and (not S2) and S3) or ((not SO) (not S1) S2 (not S3)) or ((not SO) S1 (not S2) (not S3)) or ((not SO) and S1 and S2 and (not S3)) or (S0 and (not S1) and (not S2) and (not S3)) or (S0 and (not S1) and S2 and (not S3));
-		
-		en_ROM_W <= ((not S0) (not S1) S2 (not S3)) or ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3));
-		en_ROM_B <= ((not S0) (not S1) S2 (not S3)) or ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3)) ;
-		
-		en_n00 <= ((not S0) S1 (not S2) (not S3));
-		
-		en_n10 <= ((not S0) S1 S2 (not S3));
-		en_n11 <= ((not S0) S1 S2 (not S3));
-		en_n12 <= ((not S0) S1 S2 (not S3));
-		en_n13 <= ((not S0) S1 S2 (not S3));
-		
-		en_n20 <= (S0 (not S1) (not S2) (not S3));
-		en_n21 <= (S0 (not S1) (not S2) (not S3));
-		en_n22 <= (S0 (not S1) (not S2) (not S3));
-		en_n23 <= (S0 (not S1) (not S2) (not S3));
-		
-		add_W0(0) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3));
-		add_W0(1) <= '0';
-		add_W0(2) <= ((not S0) S1 S2 (not S3));
-		add_W0(3) <= (S0 (not S1) (not S2) (not S3));
-		
-		add_B0(0) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3)) or (S0 (not S1) (not S2) (not S3));
-		add_B0(1) <= '0';
-		add_B0(2) <= ((not S0) S1 S2 (not S3));
-		add_B0(3) <= (S0 (not S1) (not S2) (not S3));
-		
-		add_W1(0) <= '0';
-		add_W1(1) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_W1(2) <= ((not S0) S1 S2 (not S3));
-		add_W1(3) <= '0';
-		
-		add_B1(0) <= '0';
-		add_B1(1) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_B1(2) <= ((not S0) S1 S2 (not S3));
-		add_B1(3) <= '0';
-		
-		add_W2(0) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_W2(1) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_W2(2) <= ((not S0) S1 S2 (not S3));
-		add_W2(3) <= '0';
-		
-		add_B2(0) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_B2(1) <= ((not S0) S1 (not S2) (not S3)) or ((not S0) S1 S2 (not S3));
-		add_B2(2) <= ((not S0) S1 S2 (not S3));
-		add_B2(3) <= '0';
-		
-		add_W3(0) <= '0';
-		add_W3(1) <= '0';
-		add_W3(2) <= ((not S0) S1 (not S2) (not S3));
-		add_W3(3) <= ((not S0) S1 S2 (not S3));
-		
-	end component;
-			
+signal NS_SIGNAL, S_SIGNAL : std_logic_vector(3 downto 0);
+
+begin 
 	
+	state <= S_SIGNAL;
 	
-	
-	
-	
-	
-	
-	
-	
+	C : combinacional port map(en_comb => en, S => S_SIGNAL, NS => NS_SIGNAL, add_W0_comb => add_W0, add_W1_comb => add_W1, add_W2_comb => add_W2, add_W3_comb => add_W3,
+																		 add_B1_comb => add_B1, add_B2_comb => add_B2, add_B3_comb => add_B3,
+																		 en_ROM_B_comb => en_ROM_B, en_ROM_W_comb => en_ROM_W,
+																		 en_n00_comb => en_n00,
+																		 en_n10_comb => en_n10, en_n11_comb => en_n11, en_n12_comb => en_n12, en_n13_comb => en_n13,
+																		 en_n20_comb => en_n20, en_n21_comb => en_n21, en_n22_comb => en_n22, en_n23_comb => en_n23,
+																		 en_n30_comb => en_n30);
+	R : reg_estados port map(A_REG => NS_SIGNAL, clk => clock, en_REG => '1', S_REG => S_SIGNAL);
+end main;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
