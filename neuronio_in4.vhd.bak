@@ -9,7 +9,10 @@ port(
 
 	bias : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 	
-	peso : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	peso_0 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	peso_1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	peso_2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	peso_3 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 	
 	input_0 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 	input_1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -56,10 +59,10 @@ end component;
 
 begin
 
-	M0 : mult port map(A => input_0, B => peso, Produto => W0xI0);
-	M1 : mult port map(A => input_1, B => peso, Produto => W1xI1);
-	M2 : mult port map(A => input_2, B => peso, Produto => W2xI2);
-	M3 : mult port map(A => input_3, B => peso, Produto => W3xI3);
+	M0 : mult port map(A => input_0, B => peso_0, Produto => W0xI0);
+	M1 : mult port map(A => input_1, B => peso_1, Produto => W1xI1);
+	M2 : mult port map(A => input_2, B => peso_2, Produto => W2xI2);
+	M3 : mult port map(A => input_3, B => peso_3, Produto => W3xI3);
 	
 	A01 : adder port map(A_ADDER => W0xI0, B_ADDER => W1xI1, S_ADDER => S01);
 	A23 : adder port map(A_ADDER => W2xI2, B_ADDER => W3xI3, S_ADDER => S23);

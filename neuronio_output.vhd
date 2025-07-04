@@ -2,10 +2,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-entity neuronio_in4 is
+entity neuronio_output is
 port(
 	clock : IN STD_LOGIC;
-	neuronio_in4_enable : IN STD_LOGIC;
+	neuronio_output_enable : IN STD_LOGIC;
 
 	bias : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 	
@@ -19,9 +19,9 @@ port(
 	output : OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
 );
 
-end neuronio_in4;
+end neuronio_output;
 
-architecture main of neuronio_in4 is
+architecture main of neuronio_output is
 
 	component adder is
 		port(
@@ -68,8 +68,7 @@ begin
 	
 	A_BIAS : adder port map(A_ADDER => S0123, B_ADDER => bias, S_ADDER => soma_bias);
 	
-	F : func port map(E => soma_bias, O =>result_func);
-	REG_N : reg port map( A_REG => result_func, clk => clock, en => neuronio_in4_enable, S_REG => output);
+	REG_N : reg port map( A_REG => soma_bias, clk => clock, en => neuronio_output_enable, S_REG => output);
 
 end architecture main;
 
