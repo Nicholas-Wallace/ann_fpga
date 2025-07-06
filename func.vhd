@@ -16,14 +16,14 @@ architecture main of func is
 	begin 
 		process (E(7))
 		begin 
-			O(0) <= not E(7);
-			O(1) <= '0';
-			O(2) <= '0';
-			O(3) <= '0';
-			O(4) <= '0';
-			O(5) <= '0';
-			O(6) <= '0';
-			O(7) <= '0';
+			O(0) <= '1';
+			O(1) <= E(7);
+			O(2) <= E(7);
+			O(3) <= E(7);
+			O(4) <= E(7);
+			O(5) <= E(7);
+			O(6) <= E(7);
+			O(7) <= E(7);
 			
 		end process;
 end architecture main;
