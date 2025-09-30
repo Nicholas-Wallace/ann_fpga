@@ -23,6 +23,8 @@ The primary goal was to apply digital design concepts learned in class—such as
 
 The network is a computational model inspired by biological neural networks. Its structure is divided into three main types of layers: an **input layer**, **hidden (intermediate) layers**, and an **output layer**.
 
+<img width="1052" height="631" alt="Screenshot from 2025-09-29 18-32-28" src="https://github.com/user-attachments/assets/cb2d88e6-e20d-429d-9eb5-dcc57ae65ad1" />
+
 The entire design is built using fundamental digital components.
 
 ### Core Components
@@ -31,6 +33,8 @@ The entire design is built using fundamental digital components.
 * **ROMs (Read-Only Memory)**: Two separate memories are used to store the weights (`Rom_W`) and biases (`Rom_B`) of the neurons.
 * **Register**: Stores the output of each neuron before it's passed to the next layer.
 * **Activation Function (`Func`)**: A simple function that checks if the neuron's calculated output is positive or negative.
+
+
 
 ---
 
@@ -43,6 +47,9 @@ The network's behavior is managed by a High-Level State Machine (HLSM) that cont
 * **Init**: The initial state to start the machine.
 * **Wait**: Intermediate states that wait for an `enable` signal or for an operation to complete.
 * **Operation States**: States where calculations are performed, memories are accessed, and neurons are activated.
+
+<img width="837" height="439" alt="Screenshot from 2025-09-29 21-55-07" src="https://github.com/user-attachments/assets/e7125795-f93e-4ede-85ed-bc8add187a8a" />
+
 
 ### Activation Function
 A simple activation function was implemented to validate the network's processing logic. The function's role is to check if the result of a neuron's computation is positive or negative.
@@ -74,6 +81,9 @@ During development, several challenges were encountered and successfully resolve
     * **Solution**: The input size was limited to 8 bits, which simplified the multiplier's logic and implementation.
 * **Memory Management**: Using a single memory for both weights and biases created complexity, requiring simultaneous access to multiple addresses.
     * **Solution**: The design was changed to use two separate memories—one for weights and one for biases. This simplified the control logic and made the code easier to manage.
+
+<img width="1470" height="614" alt="Screenshot from 2025-09-29 21-56-59" src="https://github.com/user-attachments/assets/4e634920-4027-4206-9066-feae6d0f88ee" />
+
 
 ---
 
